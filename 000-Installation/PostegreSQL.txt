@@ -1,0 +1,17 @@
+1. Go to the official PostgreSQL website at https://www.postgresql.org/download/.
+
+2. Choose your operating system and download the PostgreSQL installer.
+
+3. Run the installer and follow the on-screen instructions.
+
+4. During the installation, select the components you want to install, including the PostgreSQL Server and command-line tools.
+
+5. Choose the installation directory and port number (the default values are usually fine).
+
+6. Set a password for the PostgreSQL superuser (postgres).
+
+7. Complete the installation process.
+
+8. Verify the installation by opening a command prompt and running the following command:
+
+psql --version

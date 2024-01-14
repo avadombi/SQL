@@ -1,0 +1,11 @@
+1. Visit the official SQLite website at https://www.sqlite.org/download.html.
+
+2. Download the precompiled binaries for your operating system.
+
+3. Extract the downloaded file to a directory of your choice.
+
+4. Add the directory containing the SQLite binary to your system's PATH environment variable.
+
+5. Verify the installation by opening a command prompt and running the following command:
+
+sqlite3 --version

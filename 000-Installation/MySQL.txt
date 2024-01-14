@@ -1,0 +1,17 @@
+1. Visit the official MySQL website at https://dev.mysql.com/downloads/installer/.
+
+2. Download the MySQL Installer for your operating system.
+
+3. Run the installer and follow the on-screen instructions.
+
+4. During the installation, select the "MySQL Server" component.
+
+5. Choose the appropriate setup type (e.g., Developer Default or Server Only).
+
+6. Set a root password for the MySQL Server.
+
+7. Complete the installation process.
+
+8. Verify the installation by opening a command prompt and running the following command:
+
+mysql --version
