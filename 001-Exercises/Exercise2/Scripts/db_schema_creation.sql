@@ -5,7 +5,8 @@ Create a database schema to organize our data
 And copy data into our tables from csv files
 */
 
--- Create our schema if not exists
+-- Create our schema if not exists. In MySQL, a schema is
+-- equivalent to a DB
 CREATE SCHEMA IF NOT EXISTS country_info_schema;
 
 -- Create our countries table
@@ -20,7 +21,7 @@ CREATE TABLE country_info_schema.countries(
     be generated automatically everytime a record
     is inserted into our table.
     */
-    country_id INT GENERATED ALWAYS AS IDENTITY,
+    country_id INT AUTO_INCREMENT,
     country_name VARCHAR(50),
     country_code_2 VARCHAR(10),
     country_code_3 VARCHAR(10),
