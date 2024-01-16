@@ -86,3 +86,28 @@ INSERT INTO cleaned_db.cities(
         country_db.cities AS c
 );
 
+DROP TABLE IF EXISTS cleaned_db.currencies;
+CREATE TABLE cleaned_db.currencies(
+    currency_id INT AUTO_INCREMENT PRIMARY KEY,
+    country_code_2 VARCHAR(50),
+    currency_name VARCHAR(100),
+    currency_code VARCHAR(3)
+);
+
+INSERT INTO cleaned_db.currencies(
+    currency_id,
+    country_code_2,
+    currency_name,
+    currency_code
+)
+
+(
+    SELECT
+        c.currency_id,
+        TRIM(LOWER(REGEXP_REPLACE(c.country_code_2, '[^[:alnum:][:space:]^. ]', '', 1, 0))),
+        TRIM(LOWER(REGEXP_REPLACE(c.currency_name, '[^[:alnum:][:space:]^. ]', '', 1, 0))),
+        TRIM(LOWER(REGEXP_REPLACE(c.currency_code, '[^[:alnum:][:space:]^. ]', '', 1, 0)))
+    FROM
+        country_db.currencies AS c
+);
+
