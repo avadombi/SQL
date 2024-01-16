@@ -58,3 +58,26 @@ LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (`country_name`, `country_code_2`, `country_code_3`, `region`, `sub_region`, `intermediate_region`);
 
+-- As above, create the tables for the other csv files
+DROP TABLE IF EXISTS country_db.cities;
+CREATE TABLE country_db.cities(
+    city_id INT AUTO_INCREMENT,
+    city_name VARCHAR(50) NOT NULL,
+    latitude DECIMAL(8, 4), -- 8 numbers from which 4 decimals
+    longitude DECIMAL(8, 4),
+    country_code_2 VARCHAR(50),
+    capital VARCHAR(5),
+    population INT,
+    insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (city_id)
+);
+
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Data/cities.csv'
+INTO TABLE country_db.cities
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(`city_name`, `latitude`, `longitude`, `country_code_2`, `capital`, @`population`, `insert_date`) -- notice @
+SET population = NULLIF(@population, '') -- if value of pop = '', replace by NULL;
+
