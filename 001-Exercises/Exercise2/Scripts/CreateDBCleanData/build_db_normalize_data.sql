@@ -111,3 +111,24 @@ INSERT INTO cleaned_db.currencies(
         country_db.currencies AS c
 );
 
+DROP TABLE IF EXISTS cleaned_db.languages;
+CREATE TABLE cleaned_db.languages(
+    language_id INT AUTO_INCREMENT PRIMARY KEY,
+    language VARCHAR(50),
+    country_code_2 VARCHAR(10)
+);
+
+INSERT INTO cleaned_db.languages(
+    language_id,
+    language,
+    country_code_2
+)
+
+(
+    SELECT
+        l.language_id,
+        TRIM(LOWER(REGEXP_REPLACE(l.language, '[^[:alnum:][:space:]^. ]', '', 1, 0))),
+        TRIM(LOWER(REGEXP_REPLACE(l.country_code_2, '[^[:alnum:][:space:]^. ]', '', 1, 0)))
+    FROM
+        country_db.languages AS l
+);
