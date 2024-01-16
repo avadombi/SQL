@@ -28,13 +28,13 @@ CREATE TABLE country_info_schema.countries(
     region VARCHAR(50),
     sub_region VARCHAR(100),
     intermediate_region VARCHAR(100),
-    -- create_on DATE,
+    create_on DATE,
     -- define our primary key
     PRIMARY KEY (country_id)
 );
 
--- Let's extract the data from our CSV
 /*
+Let's extract the data from our CSV
 For security purposes, it is recommanded to store our data in the following directroy:
 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/'
     Note: ProgramDat is a hidden Directory
@@ -43,13 +43,18 @@ For security purposes, it is recommanded to store our data in the following dire
     From there, let's create a directory named Exercise1
         In that directory, create another directory named Data
             Move data into this directory
+
+-- I found that some data was truncated, so that more data than existing column has been created (no sql data)
+-- so, I decided to remove them manually. L31, 156, 198, 231
+
+-- ENCLOSED BY '"'  -- Our values are not enclosed by ", so it's not necessary here
+IGNORE 1 ROWS  -- because the first row is a header
 */
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Data/countries.csv'
 INTO TABLE country_info_schema.countries
--- our countries.csv is delimited by ","
 FIELDS TERMINATED BY ','
--- ENCLOSED BY '"'  -- Our values are not enclosed by ", so it's not necessary here
 LINES TERMINATED BY '\n'
-IGNORE 1 ROWS  -- because the first row is a header
+IGNORE 1 ROWS
 (`country_name`, `country_code_2`, `country_code_3`, `region`, `sub_region`, `intermediate_region`);
+
