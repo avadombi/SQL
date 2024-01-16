@@ -1,3 +1,3 @@
-USE country_info_schema;
+USE country_db;
 
-SELECT * FROM countries;
+SELECT * FROM countries LIMIT 5;

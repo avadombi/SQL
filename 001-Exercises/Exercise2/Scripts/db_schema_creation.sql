@@ -7,7 +7,7 @@ And copy data into our tables from csv files
 
 -- Create our schema if not exists. In MySQL, a schema is
 -- equivalent to a DB
-CREATE SCHEMA IF NOT EXISTS country_info_schema;
+CREATE SCHEMA IF NOT EXISTS country_db;
 
 -- Create our countries table
 /*
@@ -15,8 +15,8 @@ Before that, we would like to remove the table
 if already exists and recreate it
 */
 
-DROP TABLE IF EXISTS country_info_schema.countries;
-CREATE TABLE country_info_schema.countries(
+DROP TABLE IF EXISTS country_db.countries;
+CREATE TABLE country_db.countries(
     /* create a country_id and allows for it to
     be generated automatically everytime a record
     is inserted into our table.
@@ -28,7 +28,7 @@ CREATE TABLE country_info_schema.countries(
     region VARCHAR(50),
     sub_region VARCHAR(100),
     intermediate_region VARCHAR(100),
-    create_on DATE,
+    create_on TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     -- define our primary key
     PRIMARY KEY (country_id)
 );
@@ -52,7 +52,7 @@ IGNORE 1 ROWS  -- because the first row is a header
 */
 
 LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Data/countries.csv'
-INTO TABLE country_info_schema.countries
+INTO TABLE country_db.countries
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
