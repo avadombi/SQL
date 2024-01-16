@@ -79,5 +79,42 @@ FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS
 (`city_name`, `latitude`, `longitude`, `country_code_2`, `capital`, @`population`, `insert_date`) -- notice @
-SET population = NULLIF(@population, '') -- if value of pop = '', replace by NULL;
+SET population = NULLIF(@population, '') -- if value of pop = '', replace by NULL
+;  -- never forget ;
+
+-- Now for currencies
+DROP TABLE IF EXISTS country_db.currencies;
+CREATE TABLE country_db.currencies(
+    currency_id INT AUTO_INCREMENT PRIMARY KEY,
+    country_code_2 VARCHAR(50),
+    currency_name VARCHAR(100),
+    currency_code VARCHAR(3)
+);
+
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Data/currencies.csv'
+INTO TABLE country_db.currencies
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(`country_code_2`, `currency_name`, `currency_code`);
+
+
+-- Languages
+DROP TABLE IF EXISTS country_db.languages;
+CREATE TABLE country_db.languages(
+    language_id INT AUTO_INCREMENT PRIMARY KEY,
+    language VARCHAR(50),
+    country_code_2 VARCHAR(10)
+);
+
+
+-- On lines 263 and 268, I had to modify the data to prevent from getting more
+-- columns than defined fields (columns) in our schema for table languages
+LOAD DATA INFILE 'C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Data/languages.csv'
+INTO TABLE country_db.languages
+FIELDS TERMINATED BY ','
+LINES TERMINATED BY '\n'
+IGNORE 1 ROWS
+(`language`, @`country_code_2`)
+SET country_code_2 = TRIM(@country_code_2);
 
