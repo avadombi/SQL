@@ -47,3 +47,42 @@ INSERT INTO cleaned_db.countries(
 );
 
 
+DROP TABLE IF EXISTS cleaned_db.cities;
+CREATE TABLE cleaned_db.cities(
+    city_id INT AUTO_INCREMENT,
+    city_name VARCHAR(50) NOT NULL,
+    latitude DECIMAL(8, 4),
+    longitude DECIMAL(8, 4),
+    country_code_2 VARCHAR(50),
+    capital VARCHAR(5),
+    population INT,
+    insert_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (city_id)
+);
+
+INSERT INTO cleaned_db.cities(
+    city_id,
+    city_name,
+    latitude,
+    longitude,
+    country_code_2,
+    capital,
+    population,
+    insert_date
+)
+
+(
+    SELECT
+        -- CAST(c.city_name AS CHAR(50)), -- Yes, It cast it into VARCHAR(N). IF N is not specified, then => CHAR
+        c.city_id,
+        CONCAT(UCASE(LEFT(LOWER(c.city_name), 1)), SUBSTRING(LOWER(c.city_name), 2)),
+        CAST(c.latitude AS DECIMAL(8, 4)),
+        CAST(c.longitude AS DECIMAL(8, 4)),
+        TRIM(LOWER(REGEXP_REPLACE(c.country_code_2, '[^[:alnum:][:space:]^. ]', '', 1, 0))),
+        IF(UPPER(TRIM(c.capital)) = 'TRUE', 1, 0),
+        CAST(c.population AS UNSIGNED),  -- Use of INT is not allowed here
+        CURRENT_TIMESTAMP
+    FROM
+        country_db.cities AS c
+);
+
