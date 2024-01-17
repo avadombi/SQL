@@ -6,3 +6,4 @@ SELECT * FROM cleaned_db.view_count_distinct_country_code_2_in_countries;
 SELECT * FROM cleaned_db.view_count_distinct_country_code_2_in_cities;
 SELECT * FROM cleaned_db.view_left_join_countries_cities;
 SELECT * FROM cleaned_db.view_left_join_countries_cities_only_where_cities_null;
+
