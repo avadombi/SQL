@@ -12,6 +12,3 @@ ADD CONSTRAINT fk_country_city
 FOREIGN KEY (country_code_2)
 -- whick key to reference from parent table
 REFERENCES cleaned_db.countries (country_code_2);
-
---
-
