@@ -15,12 +15,19 @@ BEGIN
             JOIN (SELECT * FROM cleaned_db.view_countries_rows_to_delete) AS countries
             ON 1=1;
 
-        -- COUNTRIES vs CCURRENCIES
+        -- COUNTRIES vs CURRENCIES
         WHEN 'leftJoinCountryCurrencies' THEN
             SELECT * FROM cleaned_db.view_left_join_countries_currencies;
 
         WHEN 'rightJoinCountryCurrencies' THEN
             SELECT * FROM cleaned_db.view_right_join_countries_currencies;
+        
+        -- COUNTRIES vs LANGUAGES
+        WHEN 'leftJoinCountryLanguages' THEN
+            SELECT * FROM cleaned_db.view_left_join_countries_languages;
+
+        WHEN 'rightJoinCountryLanguages' THEN
+            SELECT * FROM cleaned_db.view_right_join_countries_languages;
 
         
         ELSE
@@ -29,4 +36,4 @@ BEGIN
 END;
 
 
-CALL test_integrity('rightJoinCountryCurrencies');
+CALL test_integrity('rightJoinCountryLanguages');

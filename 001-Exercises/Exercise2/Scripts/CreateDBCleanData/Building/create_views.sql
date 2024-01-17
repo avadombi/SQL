@@ -88,3 +88,24 @@ FROM cleaned_db.countries AS c
 RIGHT JOIN cleaned_db.currencies AS i ON c.country_code_2 = i.country_code_2
 WHERE c.country_code_2 IS NULL
 ORDER BY c.country_code_2 ASC, i.country_code_2 ASC;
+
+
+/*
+COUNTRIES vs LANGUAGES
+*/
+
+DROP VIEW IF EXISTS cleaned_db.view_left_join_countries_languages;
+CREATE VIEW cleaned_db.view_left_join_countries_languages AS
+SELECT DISTINCT c.country_code_2 AS 'from country', i.country_code_2 'from languages'
+FROM cleaned_db.countries AS c
+LEFT JOIN cleaned_db.languages AS i ON c.country_code_2 = i.country_code_2
+WHERE i.country_code_2 IS NULL
+ORDER BY c.country_code_2 ASC, i.country_code_2 ASC;
+
+DROP VIEW IF EXISTS cleaned_db.view_right_join_countries_languages;
+CREATE VIEW cleaned_db.view_right_join_countries_languages AS
+SELECT DISTINCT c.country_code_2 AS 'from country', i.country_code_2 'from languages'
+FROM cleaned_db.countries AS c
+RIGHT JOIN cleaned_db.languages AS i ON c.country_code_2 = i.country_code_2
+WHERE c.country_code_2 IS NULL
+ORDER BY c.country_code_2 ASC, i.country_code_2 ASC;
