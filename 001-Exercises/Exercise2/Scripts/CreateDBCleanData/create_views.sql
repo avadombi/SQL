@@ -40,11 +40,30 @@ DROP VIEW IF EXISTS cleaned_db.view_left_join_countries_cities;
 CREATE VIEW cleaned_db.view_left_join_countries_cities AS
 SELECT DISTINCT c.country_code_2 AS 'from country', i.country_code_2 'from cities'
 FROM cleaned_db.countries AS c
-LEFT JOIN cleaned_db.cities AS i ON c.country_code_2 = i.country_code_2;
+LEFT JOIN cleaned_db.cities AS i ON c.country_code_2 = i.country_code_2
+WHERE i.country_code_2 IS NULL
+ORDER BY c.country_code_2 ASC, i.country_code_2 ASC;
 
-DROP VIEW IF EXISTS cleaned_db.view_left_join_countries_cities_only_where_cities_null;
-CREATE VIEW cleaned_db.view_left_join_countries_cities_only_where_cities_null AS
+DROP VIEW IF EXISTS cleaned_db.view_right_join_countries_cities;
+CREATE VIEW cleaned_db.view_right_join_countries_cities AS
 SELECT DISTINCT c.country_code_2 AS 'from country', i.country_code_2 'from cities'
 FROM cleaned_db.countries AS c
-LEFT JOIN cleaned_db.cities AS i ON c.country_code_2 = i.country_code_2
-WHERE i.country_code_2 IS NULL;
+RIGHT JOIN cleaned_db.cities AS i ON c.country_code_2 = i.country_code_2
+WHERE c.country_code_2 IS NULL
+ORDER BY c.country_code_2 ASC, i.country_code_2 ASC;
+
+-- view to show records of cities table where country_code_2 is in ('bq', 'md', 'sh', 'tz') vs total records
+DROP VIEW IF EXISTS cleaned_db.view_cities_rows_to_delete;
+CREATE VIEW cleaned_db.view_cities_rows_to_delete AS
+SELECT t1.total, t2.extra
+FROM (SELECT COUNT(*) AS total FROM cleaned_db.cities) AS t1
+JOIN (SELECT COUNT(*) AS extra FROM cleaned_db.cities WHERE country_code_2 IN ('bq', 'md', 'sh', 'tz')) AS t2
+ON 1=1;
+
+-- view to show records of countries table where country_code_2 is in ('aq', 'bv', 'cc', 'io', 'tf') vs total records
+DROP VIEW IF EXISTS cleaned_db.view_countries_rows_to_delete;
+CREATE VIEW cleaned_db.view_countries_rows_to_delete AS
+SELECT t1.total, t2.extra
+FROM (SELECT COUNT(*) AS total FROM cleaned_db.countries) AS t1
+JOIN (SELECT COUNT(*) AS extra FROM cleaned_db.countries WHERE country_code_2 IN ('aq', 'bv', 'cc', 'io', 'tf')) AS t2
+ON 1=1;
