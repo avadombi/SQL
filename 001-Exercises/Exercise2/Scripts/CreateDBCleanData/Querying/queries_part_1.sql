@@ -1,3 +1,5 @@
+-- SHOW GRANTS FOR 'avadombi'@'localhost';
+
 /*
 List all of the regions and the total number of countries in each region.  
 Order by country count in descending order and capitalize the region name.
@@ -71,5 +73,49 @@ INNER JOIN cleaned_db.cities AS i
 ON c.country_code_2 = i.country_code_2
 WHERE (region = 'asia') AND (i.insert_date NOT BETWEEN '2021-06-01' AND '2021-09-30');
 
+/*
+List the country, city name, population and city name length for the city names that are palindromes in the 
+Western Asia sub-region.  Format the population with a thousands separator (1,000) and format the length of 
+the city name in roman numerals.  Order by the length of the city name in descending order and 
+alphabetically in ascending order.
+*/
+
+
+SELECT
+    c.country_name,
+    i.city_name,
+    FORMAT(i.population, 0) AS population, -- 0 mean no decimal,
+    LENGTH(i.city_name) AS city_name_length
+FROM cleaned_db.countries AS c
+INNER JOIN cleaned_db.cities AS i
+ON c.country_code_2 = i.country_code_2
+WHERE c.sub_region = 'western asia' AND (i.city_name = REVERSE(i.city_name))
+ORDER BY city_name_length DESC, i.city_name ASC;
+
+
+/* 
+List all of the countries that end in 'stan'.  Make your query case-insensitive and list 
+whether the total population of the cities listed is an odd or even number for cities inserted in 2022 or +.  
+Order by whether the population value is odd or even in ascending order and country name in alphabetical order.
+*/
+
+SELECT
+    CONCAT(UCASE(SUBSTRING(c.country_name, 1, 1)), SUBSTRING(c.country_name, 2)),
+    FORMAT(SUM(i.population), 0),
+    CASE
+        WHEN (SUM(i.population) % 2 = 0) THEN
+            'Even'
+        ELSE
+            'Odd'
+    END AS odd_or_even
+
+FROM cleaned_db.countries c
+INNER JOIN cleaned_db.cities i
+ON c.country_code_2 = i.country_code_2
+WHERE
+    c.country_name LIKE '%stan' AND EXTRACT(YEAR FROM i.insert_date) >= 2022
+GROUP BY c.country_name
+ORDER BY c.country_name ASC, odd_or_even ASC
+;
 
 
