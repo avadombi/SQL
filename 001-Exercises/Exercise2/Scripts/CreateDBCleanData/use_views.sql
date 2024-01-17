@@ -1,0 +1,1 @@
+SELECT * FROM cleaned_db.view_countries;
