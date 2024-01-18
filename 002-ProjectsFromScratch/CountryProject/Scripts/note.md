@@ -19,11 +19,11 @@ How to set this one-to-many cardinality? See below:
 - Countries get info about individual countries without any duplicate.
 - Cities refers to country_id in order to be able to link many cities has possible to a given country
 
-CREATE TABLE countries (<br />
-    country_id INT AUTO_INCREMENT PRIMARY KEY,<br />
-    field_1 ...,<br />
-    ...,<br />
-    field_n ...<br />
+CREATE TABLE countries (__
+    country_id INT AUTO_INCREMENT PRIMARY KEY,__
+    field_1 ...,__
+    ...,__
+    field_n ...__
 );
 
 CREATE TABLE cities (
