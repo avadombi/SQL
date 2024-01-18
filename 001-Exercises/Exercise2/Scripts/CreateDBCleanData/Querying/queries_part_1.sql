@@ -119,3 +119,28 @@ ORDER BY c.country_name ASC, odd_or_even ASC
 ;
 
 
+/*
+List the third most populated city ranked by region WITHOUT using limit or offset.  
+List the region name, city name, population and order the results by region.
+*/
+
+SELECT
+    CONCAT(UCASE(SUBSTRING(region, 1, 1)), SUBSTRING(region, 2)) AS region,
+    city_name,
+    FORMAT(population, 0) AS population
+FROM
+    (
+        SELECT
+            c.region,
+            i.city_name,
+            i.population,
+            -- ROW_NUMBER() attribute a no to each row of the output
+            -- OVER is used to define a window to which apply something
+            -- PARTITION BY region divide data in distinct groups based on region
+            -- ORDER BY define the order from which the row's number will be attribuated (for each group)
+            ROW_NUMBER() OVER (PARTITION BY c.region ORDER BY i.population DESC) AS rn
+        FROM cleaned_db.countries c
+        JOIN cleaned_db.cities i ON c.country_code_2 = i.country_code_2
+    ) AS ranked_cities
+WHERE ranked_cities.rn = 3
+ORDER BY region;
