@@ -10,7 +10,7 @@ Our database, named country_db, has 3 tables:
 
 **NOTE**: If a table A contains a FK (PK of B), that means that we want a one-to-one relationship **FROM** A to B: a record in A is associated to one and only one record in B.
 
-* Countries and Cities
+### Countries and Cities
 
 A county can have 1 city (min) or many cities (max).
 A city can be associated with 1 country (min) and only 1 country (max).
@@ -39,7 +39,7 @@ CREATE TABLE cities (
 ```
 
 
-* Countries and Currencies
+### Countries and Currencies
 
 A country can be associated with 1 currency (min) and only 1 currency (max).
 A currency can be associated with 1 country (min) or many countries (max).
