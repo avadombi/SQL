@@ -13,6 +13,20 @@
             "database": "avadshop",
             "username": "avadombi",
             "askForPassword": true
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "SUConnection",
+            "database": "country_db",
+            "username": "root",
+            "askForPassword": true
         }
     ],
     "files.watcherExclude": {
