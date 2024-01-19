@@ -32,7 +32,7 @@ CREATE TABLE countries (
 );
 
 
--- 2. Cities table
+-- 3. Cities table
 
 DROP TABLE IF EXISTS cities;
 CREATE TABLE cities (
