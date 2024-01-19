@@ -1,3 +1,6 @@
+-- Do not forget to attribute the needed privileges (INDEX)
+-- and disconnect and reconnect the db for it to work
+
 USE country_db;
 
 CREATE UNIQUE INDEX idx_country_name
