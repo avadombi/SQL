@@ -121,3 +121,10 @@ Indexes not seperated from the table. Typically, these are primary keys
 ```
 ALTER TABLE table_name DROP INDEX composite_index;
 ```
+
+## 2.2. Create triggers
+
+"In MySQL, a trigger is a stored program invoked automatically in response to an event such as insert, update, or delete that occurs in the associated table."
+
+![triggers](../Data/triggers.png "triggers - source: MySQL Tutorials")
+Source: MySQL Tutorials
