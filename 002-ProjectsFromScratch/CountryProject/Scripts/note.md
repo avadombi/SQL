@@ -126,5 +126,51 @@ ALTER TABLE table_name DROP INDEX composite_index;
 
 "In MySQL, a trigger is a stored program invoked automatically in response to an event such as insert, update, or delete that occurs in the associated table."
 
-![triggers](../Data/triggers.png "triggers - source: MySQL Tutorials")
-Source: MySQL Tutorials
+![triggers](../Data/triggers.png "triggers - source: MySQL Tutorial")
+Source: MySQL Tutorial
+
+Advantages:
+* Triggers provide another way to check the integrity of data.
+* Triggers handle errors from the database layer.
+* Triggers give an alternative way to run scheduled tasks.
+
+### 2.2.1. How to create a trigger?
+
+```
+CREATE TRIGGER trigger_name
+{BEFORE | AFTER} {INSERT | UPDATE | DELETE}
+ON table_name
+FOR EACH ROW
+BEGIN
+    -- Trigger body (SQL statements)
+END;
+```
+
+Concrete example:
+```
+CREATE TRIGGER update_items_trigger
+AFTER UPDATE
+ON items
+FOR EACH ROW
+BEGIN
+    INSERT INTO item_changes (item_id, change_type)
+    VALUES (NEW.id, 'UPDATE');
+END;
+```
+
+### 2.2.2. How to drop triggers?
+
+```
+DROP TRIGGER [IF EXISTS] [schema_name.]trigger_name;
+```
+
+Concrete example:
+```
+DROP TRIGGER before_billing_update;
+```
+
+### 2.2.3. Show triggers
+
+```
+SHOW TRIGGERS;
+```
