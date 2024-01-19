@@ -65,3 +65,24 @@ CREATE TABLE currencies (
 );
 ```
 
+# 2. Improve our database
+
+## 2.1. Searching operation optimization: indexes
+
+There exist many types of indexes. Below are some of them:
+
+* Unique indexes
+
+For example, a field of your table other than the PK that you want it to be unique. Example: email address.
+
+* Prefix indexes
+
+Efficient for string fields.
+
+* Composite indexes
+
+Indexes composed of at list two columns (or fields)
+
+* Clustered indexes
+
+Indexes not seperated from the table. Typically, these are primary keys
