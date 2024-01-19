@@ -75,9 +75,15 @@ There exist many types of indexes. Below are some of them:
 
 For example, a field of your table other than the PK that you want it to be unique. Example: email address.
 
+**To add a UNIQUE INDEX**
 ```
 ALTER TABLE table_name
-ADD CONSTRAINT constraint_name UNIQUE KEY(column_1,column_2,...);
+ADD CONSTRAINT unique_index UNIQUE KEY(column_1,column_2,...);
+```
+
+**To delete a UNIQUE INDEX**
+```
+ALTER TABLE table_name DROP INDEX unique_index;
 ```
 
 * Prefix indexes
