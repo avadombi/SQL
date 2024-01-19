@@ -71,7 +71,7 @@ CREATE TABLE currencies (
 
 There exist many types of indexes. Below are some of them:
 
-* Unique indexes
+### 2.1.1. Unique indexes
 
 For example, a field of your table other than the PK that you want it to be unique. Example: email address.
 
@@ -88,7 +88,7 @@ ALTER TABLE table_name
 ADD CONSTRAINT unique_index UNIQUE KEY(column_1,column_2,...);
 ```
 
-* Prefix indexes
+### 2.1.2. Prefix indexes
 
 Efficient for string fields.
 
@@ -99,7 +99,7 @@ CREATE INDEX prefix_index
 ON table_name(column_name(length));
 ```
 
-* Composite indexes
+### 2.1.3. Composite indexes
 
 Indexes composed of at list two columns (or fields).
 
@@ -111,13 +111,13 @@ ON table_name(c2,c3,c4);
 ```
 
 
-* Clustered indexes
+### 2.1.4. Clustered indexes
 
 Indexes not seperated from the table. Typically, these are primary keys
 
 ---------
 
-**To delete an INDEX**
+### 2.1.5. Delete an INDEX
 ```
 ALTER TABLE table_name DROP INDEX composite_index;
 ```
